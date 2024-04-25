@@ -1,0 +1,46 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 col-md-12 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="title">Listado de productos</h2>
+                        <button (click)="goToCreate()" class="btn btn-success">Nuevo producto</button>
+                    </div>
+                    <table *ngIf="products.length > 0" class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Ubicación</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products">
+                                <th scope="row">{{ product.name }}</th>
+                                <td>{{ product.category }}</td>
+                                <td>{{ product.location }}</td>
+                                <td>{{ product.price | currency: 'EUR' }}</td>
+                                <td class="d-flex justify-content-end align-items-center">
+                                    <button [routerLink]="['editar-producto', product._id]" class="btn btn-primary me-3">
+                                        Editar
+                                        <i class="fa-sharp fa-solid fa-pen-to-square text-light"></i>
+                                    </button>
+                                    <button (click)="deleteProduct( product._id )" class="btn btn-danger">
+                                        Eliminar
+                                        <i class="fa-sharp fa-solid fa-trash text-light"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="products.length <= 0" class="alert alert-danger w-100 mt-2">
+                        <span>No hay productos que mostrar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
